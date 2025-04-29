@@ -18,29 +18,46 @@
             <label for="nom">Nom:</label>
             <input type="text" id="nom" name="nom" required><br>
 
-            <!-- TO-DO
-            
+            <!--
             * Definir els camps de formulari:
-
               * Cognoms (obligatori)
               * Correu electrònic (obligatori i en format de correu electrónic)
               * adreça
               * Telèfon
-
             -->
+            <label for="cognom">Cognom:</label>
+            <input type="text" id="cognom" name="cognom" required><br>
+
+            <label for="email">Correu electrònic:</label>
+            <input type="email" id="email" name="email" required><br>
+
+            <label for="adreça">Adreça:</label>
+            <input type="text" id="adreça" name="adreça"><br>
+
+            <label for="tel">Telèfon:</label>
+            <input type="tel" id="tel" name="tel"><br>
         </fieldset>
 
         <fieldset>
             <legend>Estudis</legend>
-            <!--  TO-DO:
-              
+
+            <!--
                 Definir els següents camps de formulari:
 
                 * Select pe al cicle, amb les opcions DAM i DAW
                 * Curs: Amb dos inputs de tipus Radio per triar 1r o 2n.
-
             -->
+            <label for="cicles">Cicle formatiu:</label>
+            <select id="cicles" name="cicles">
+                <option name="cicle" value="dam">DAM</option>
+                <option name="cicle" value="daw">DAW</option>
+            </select>
 
+            <label for="cursPrimer">Curs:</label>
+            <input type="radio" id="cursPrimer" name="curs" value="primer">Primer<br>
+
+            <label for="cursSegon"></label>
+            <input type="radio" id="cursSegon" name="curs" value="segon">Segon<br>
         </fieldset>
 
         <fieldset id="modulsFieldset">
