@@ -72,7 +72,7 @@ function actualitzarModuls() {
     <label><input type="checkbox" name="moduls" value="Programació"> Programació</label>
     */
 
-    // Creació dinámica dels elements
+    // Creació dinámica dels elements recorrent els mòduls del cicle i curs seleccionats
     moduls[cicle][curs].forEach(modul => {
         // Label per cada mòdul
         const label = document.createElement('label');
@@ -85,7 +85,7 @@ function actualitzarModuls() {
         label.appendChild(checkbox);
         label.appendChild(document.createTextNode(` ${modul}`));
 
-        // Y afegim el label al div de mòduls
+        // I afegim el label al div de mòduls
         llistaModulsDiv.appendChild(label);
     });
 }
@@ -107,7 +107,7 @@ form.addEventListener('submit', async (e) => {
 
     const formData = new FormData(form);
 
-    /* TO-DO
+    /* TO-DO DONE
     
     Prepara un objece JSON amb la informació guardada al formulari
 
@@ -119,4 +119,46 @@ form.addEventListener('submit', async (e) => {
     // Una vegada rebuda la resposta, creeu una URL amb ell, un enllaç
     // i forceu el clic en ell per descarregar el document.
 
+    // Preparem un objecte JSON amb la informació del formulari
+    const jsonData = {
+        nom: formData.get('nom'),
+        cognom: formData.get('cognom'),
+        email: formData.get('email'),
+        adreça: formData.get('adreça'),
+        tel: formData.get('tel'),
+        cicle: formData.get('cicles'),
+        curs: formData.get('curs'),
+        moduls: formData.getAll('moduls') // getAll per obtindre tots els valors seleccionats
+    };
+
+    try {
+        // Enviem les dades al servidor amb una petició POST
+        const response = await fetch('/enviar-matricula', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            // Convertim el JSON a un string per enviar-lo al servidor
+            body: JSON.stringify(jsonData)
+        });
+
+        if (!response.ok) {
+            throw new Error('Error en enviar les dades al servidor');
+        }
+
+        // Rebem el PDF com a resposta
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+
+        // Creem un enllaç per descarregar el PDF
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'matricula.pdf';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Hi ha hagut un error al processar la matrícula.');
+    }
 });

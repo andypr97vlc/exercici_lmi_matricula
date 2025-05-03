@@ -57,14 +57,27 @@ app.post('/enviar-matricula', async (req, res) => {
 // Funció auxiliar per a generar l'XML
 function generarXML(dades) {
     /*
-    TO-DO:
+    TO-DO: DONE
 
     Amb les dades rebudes, generem un XML, amb el format corresponent (veieu exemple)
     */
     return `
-<matricula>
-  ...
-</matricula>
+        <matricula>
+          <alumne>
+            <nom>${dades.nom}</nom>
+            <cognom>${dades.cognom}</cognom>
+            <email>${dades.email}</email>
+            <adreça>${dades.adreça}</adreça>
+            <tel>${dades.tel}</tel>
+          </alumne>
+          <curs>
+            <cicle>${dades.cicle}</cicle>
+            <any>${dades.curs}</any>
+            <moduls>
+              ${dades.moduls.map(modul => `<modul>${modul}</modul>`).join('\n      ')}
+            </moduls>
+          </curs>
+        </matricula>
     `;
 }
 
@@ -72,7 +85,7 @@ function generarXML(dades) {
 function transformarXSLT(xmlPath, foPath) {
     return new Promise((resolve, reject) => {
         /*
-        TO-DO:
+        TO-DO: DONE
 
         Crea l'ordre xsltproc per convertir l'xml definit en xmlPath en un XML en format
         XSL-FO en foPath. 
@@ -80,7 +93,7 @@ function transformarXSLT(xmlPath, foPath) {
         La plantilla la guardareu en ./xslt/matricula.xsl
 
         */
-        const cmd = ``;
+        const cmd = `xsltproc -o "${foPath}" ./xslt/matricula.xsl "${xmlPath}"`; // Comando per aplicar la transformació XSLT
 
         exec(cmd, (error, stdout, stderr) => {
             if (error) {
@@ -95,14 +108,14 @@ function transformarXSLT(xmlPath, foPath) {
 // Funció auxiliar per a generar el PDF (cridant Apache FOP)
 function generarPDF(foPath, pdfPath) {
     return new Promise((resolve, reject) => {
-        /* TO-DO: 
+        /* TO-DO: DONE?
         
         Crea l'ordre que utilitzaràs amb fop per convertir l'XML-FO a PDF
         L'xml-fo es troba a foPath i el pdf el generaràs en pdfPath 
 
         */
         
-        const cmd = `fop "${foPath}" "${pdfPath}"`;
+        const cmd = `fop "${foPath}" "${pdfPath}"`; // Comando per generar el PDF
 
         exec(cmd, (error, stdout, stderr) => {
             if (error) {
