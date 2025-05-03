@@ -59,22 +59,35 @@ function actualitzarModuls() {
     // Si falta informació no fem res
     if (!cicle || !curs) return;
 
-
     // Netegem els mòduls anteriors
     modulsFieldset.innerHTML = '<legend>Mòduls</legend>';
     var llistaModulsDiv=document.createElement('div');
     llistaModulsDiv.classList.add("llistaModuls");
     modulsFieldset.appendChild(llistaModulsDiv);
 
-    /* TO-DO
+    /* TO-DO DONE
     Recorre els diferents mòduls del cicle i curs seleccionat, i crea 
     el corresponent label i checkbox, amb l'estructura:
 
     <label><input type="checkbox" name="moduls" value="Programació"> Programació</label>
-
-    
     */
 
+    // Creació dinámica dels elements
+    moduls[cicle][curs].forEach(modul => {
+        // Label per cada mòdul
+        const label = document.createElement('label');
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.name = 'moduls';
+        checkbox.value = modul;
+
+        // Checkbox i el text a cada label
+        label.appendChild(checkbox);
+        label.appendChild(document.createTextNode(` ${modul}`));
+
+        // Y afegim el label al div de mòduls
+        llistaModulsDiv.appendChild(label);
+    });
 }
 
 // Escoltem canvis en la selecció de cicle/curs
@@ -87,9 +100,8 @@ form.addEventListener('submit', async (e) => {
     // Inhibim l'enviament automàtic del formulari
     e.preventDefault();
 
-
-    // Agafem les dades del formulari en formData, com a parells clau/valir
-    // Podeu consultar la documentació de la finterfície FormData en: 
+    // Agafem les dades del formulari en formData, com a parells clau/valor
+    // Podeu consultar la documentació de la interfície FormData en:
     // https://developer.mozilla.org/en-US/docs/Web/API/FormData
     // Per agafar les propietats des d'aquesta interfície fem ús de form.get('nom_del_camp_del_formulari')
 
