@@ -65,18 +65,16 @@ function generarXML(dades) {
         <matricula>
           <alumne>
             <nom>${dades.nom}</nom>
-            <cognom>${dades.cognom}</cognom>
+            <cognoms>${dades.cognoms}</cognoms>
             <email>${dades.email}</email>
-            <adreça>${dades.adreça}</adreça>
-            <tel>${dades.tel}</tel>
+            <adreca>${dades.adreca}</adreca>
+            <telefon>${dades.telefon}</telefon>
           </alumne>
-          <curs>
             <cicle>${dades.cicle}</cicle>
-            <any>${dades.curs}</any>
+            <curs>${dades.curs}</curs>
             <moduls>
               ${dades.moduls.map(modul => `<modul>${modul}</modul>`).join('\n      ')}
             </moduls>
-          </curs>
         </matricula>
     `;
 }
@@ -108,7 +106,7 @@ function transformarXSLT(xmlPath, foPath) {
 // Funció auxiliar per a generar el PDF (cridant Apache FOP)
 function generarPDF(foPath, pdfPath) {
     return new Promise((resolve, reject) => {
-        /* TO-DO: DONE?
+        /* TO-DO: DONE
         
         Crea l'ordre que utilitzaràs amb fop per convertir l'XML-FO a PDF
         L'xml-fo es troba a foPath i el pdf el generaràs en pdfPath 

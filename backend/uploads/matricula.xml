@@ -1,0 +1,19 @@
+
+        <matricula>
+          <alumne>
+            <nom>Manolo</nom>
+            <cognoms>Manolito</cognoms>
+            <email>manolito.tralalero@gmail.com</email>
+            <adreca>C/Sucasa 33</adreca>
+            <telefon>999999999</telefon>
+          </alumne>
+            <cicle>DAW</cicle>
+            <curs>2</curs>
+            <moduls>
+              <modul>Desenvolupament Web en entorn client</modul>
+      <modul>Desenvolupament web en entorn servidor</modul>
+      <modul>Disseny d'interfícies web</modul>
+      <modul>Itinerari Personal per a l'Ocupabilitat II</modul>
+            </moduls>
+        </matricula>
+    

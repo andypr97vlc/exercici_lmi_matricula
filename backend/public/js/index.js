@@ -122,11 +122,11 @@ form.addEventListener('submit', async (e) => {
     // Preparem un objecte JSON amb la informació del formulari
     const jsonData = {
         nom: formData.get('nom'),
-        cognom: formData.get('cognom'),
+        cognoms: formData.get('cognoms'),
         email: formData.get('email'),
-        adreça: formData.get('adreça'),
-        tel: formData.get('tel'),
-        cicle: formData.get('cicles'),
+        adreca: formData.get('adreca'),
+        telefon: formData.get('telefon'),
+        cicle: formData.get('cicle'),
         curs: formData.get('curs'),
         moduls: formData.getAll('moduls') // getAll per obtindre tots els valors seleccionats
     };
